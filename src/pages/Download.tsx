@@ -205,8 +205,12 @@ const DownloadPage = () => {
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Additional Resources */}
+      {/* Additional Resources */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -257,8 +261,12 @@ const DownloadPage = () => {
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Usage Guidelines */}
+      {/* Usage Guidelines */}
+      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
