@@ -8,7 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { KrishnaQuoteCard } from "@/components/KrishnaQuoteCard";
-import { getRandomVerse, getVersesByTag } from "@/data/gitaVerses";
+import {
+  getRandomVerse,
+  getVersesByTag,
+  getBestVerseForSituation,
+  getSourceRecommendation,
+} from "@/data/gitaVerses";
 import {
   Send,
   Loader2,
@@ -25,6 +30,7 @@ interface Message {
   content: string;
   timestamp: Date;
   verse?: any;
+  sourceRecommendation?: string;
 }
 
 const Chat = () => {
@@ -50,45 +56,75 @@ const Chat = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Sample Krishna responses based on common life questions
+  // Enhanced Krishna responses with better AI matching
   const getKrishnaResponse = (userQuestion: string) => {
     const question = userQuestion.toLowerCase();
     let responseVerse;
     let krishnaMessage;
+    let sourceRec;
 
-    if (question.includes("stress") || question.includes("tension")) {
-      responseVerse = getVersesByTag("stress")[0];
+    // Advanced question matching
+    if (
+      question.includes("stress") ||
+      question.includes("tension") ||
+      question.includes("तनाव")
+    ) {
+      responseVerse = getBestVerseForSituation("stress");
       krishnaMessage =
         i18n.language === "hi"
-          ? "हे पार्थ, चिंता मत करो। जीवन में सुख-दुख सभी क्षणिक हैं। धैर्य रखो और कर्म करते जाओ।"
-          : "Hey Parth, do not worry. Both happiness and distress in life are temporary. Be patient and continue your duties.";
-    } else if (question.includes("failure") || question.includes("fail")) {
-      responseVerse = getVersesByTag("failure")[0];
+          ? `हे पार्थ, चिंता मत करो। देखो अध्याय ${responseVerse.chapter}, श्लोक ${responseVerse.verse} क्या कहता है। जीवन में सुख-दुख सभी क्षणिक हैं। धैर्य रखो और कर्म क���ते जाओ।`
+          : `Hey Parth, do not worry. See what Chapter ${responseVerse.chapter}, Verse ${responseVerse.verse} teaches us. Both happiness and distress in life are temporary. Be patient and continue your duties.`;
+    } else if (
+      question.includes("failure") ||
+      question.includes("fail") ||
+      question.includes("असफल")
+    ) {
+      responseVerse = getBestVerseForSituation("failure");
       krishnaMessage =
         i18n.language === "hi"
-          ? "हे पार्थ, असफलता से निराश मत हो। तुम्हारा अधिकार केवल कर्म पर है, फल पर नहीं।"
-          : "Hey Parth, do not be disheartened by failure. You have the right only to perform your duty, not to the fruits of action.";
-    } else if (question.includes("anger") || question.includes("angry")) {
-      responseVerse = getVersesByTag("self_control")[0];
+          ? `हे पार्थ, असफलता से निराश मत हो। अध्याय ${responseVerse.chapter}, श्लोक ${responseVerse.verse} में मैंने कहा है - तुम्हारा अधिकार केवल कर्म पर है, फल पर नहीं।`
+          : `Hey Parth, do not be disheartened by failure. In Chapter ${responseVerse.chapter}, Verse ${responseVerse.verse}, I have said - You have the right only to perform your duty, not to the fruits of action.`;
+    } else if (
+      question.includes("anger") ||
+      question.includes("angry") ||
+      question.includes("क्रोध")
+    ) {
+      responseVerse = getBestVerseForSituation("anger");
       krishnaMessage =
         i18n.language === "hi"
-          ? "हे पार्थ, क्रोध तुम्हारे विवेक को नष्ट कर देता है। मन को नियंत्रित करो और शांत रहो।"
-          : "Hey Parth, anger destroys your wisdom. Control your mind and remain peaceful.";
-    } else if (question.includes("fear") || question.includes("scared")) {
-      responseVerse = getVersesByTag("fear")[0];
+          ? `हे पार्थ, क्रोध तुम्हारे विवेक को नष्ट कर देता है। अध्याय ${responseVerse.chapter}, श्लोक ${responseVerse.verse} में समाधान है। मन को नियंत्रित करो और शांत रहो।`
+          : `Hey Parth, anger destroys your wisdom. Chapter ${responseVerse.chapter}, Verse ${responseVerse.verse} has the solution. Control your mind and remain peaceful.`;
+    } else if (
+      question.includes("fear") ||
+      question.includes("scared") ||
+      question.includes("डर")
+    ) {
+      responseVerse = getBestVerseForSituation("fear");
       krishnaMessage =
         i18n.language === "hi"
-          ? "हे पार्थ, डरो मत। मैं तुम्हारे साथ हूं। मेरी शरण में आओ और निर्भय हो जाओ।"
-          : "Hey Parth, do not fear. I am with you. Surrender to me and become fearless.";
+          ? `हे पार्थ, डरो मत। अध्याय ${responseVerse.chapter}, श्लोक ${responseVerse.verse} देखो - मैं तुम्हारे साथ हूं। मेरी शरण में आओ और निर्भय हो जाओ।`
+          : `Hey Parth, do not fear. See Chapter ${responseVerse.chapter}, Verse ${responseVerse.verse} - I am with you. Surrender to me and become fearless.`;
+    } else if (
+      question.includes("ego") ||
+      question.includes("pride") ||
+      question.includes("अहंकार")
+    ) {
+      responseVerse = getBestVerseForSituation("ego");
+      krishnaMessage =
+        i18n.language === "hi"
+          ? `हे पार्थ, अहंकार त्यागो। अध्याय ${responseVerse.chapter}, श्लोक ${responseVerse.verse} में मैंने समझाया है कि सब कुछ प्रकृति करती है, तुम केवल निमित्त हो।`
+          : `Hey Parth, give up ego. In Chapter ${responseVerse.chapter}, Verse ${responseVerse.verse}, I have explained that everything is done by nature, you are just an instrument.`;
     } else {
       responseVerse = getRandomVerse();
       krishnaMessage =
         i18n.language === "hi"
-          ? "हे पार्थ, यह श्लोक तुम्हारे प्रश्न का उत्तर देगा। गीता का ज्ञान सभी समस्याओं का समाधान है।"
-          : "Hey Parth, this verse will answer your question. The wisdom of the Gita is the solution to all problems.";
+          ? `हे पार्थ, अध्याय ${responseVerse.chapter}, श्लोक ${responseVerse.verse} तुम्हारे प्रश्न का उत्तर देगा। गीता का ज्ञान सभी समस्याओं का समाधान है।`
+          : `Hey Parth, Chapter ${responseVerse.chapter}, Verse ${responseVerse.verse} will answer your question. The wisdom of the Gita is the solution to all problems.`;
     }
 
-    return { krishnaMessage, responseVerse };
+    sourceRec = getSourceRecommendation(responseVerse);
+
+    return { krishnaMessage, responseVerse, sourceRec };
   };
 
   const handleSendMessage = async () => {
@@ -107,7 +143,7 @@ const Chat = () => {
 
     // Simulate AI processing time
     setTimeout(() => {
-      const { krishnaMessage, responseVerse } =
+      const { krishnaMessage, responseVerse, sourceRec } =
         getKrishnaResponse(inputMessage);
 
       const krishnaResponse: Message = {
@@ -116,6 +152,7 @@ const Chat = () => {
         content: krishnaMessage,
         timestamp: new Date(),
         verse: responseVerse,
+        sourceRecommendation: sourceRec,
       };
 
       setMessages((prev) => [...prev, krishnaResponse]);
@@ -245,9 +282,19 @@ const Chat = () => {
                             <div className="mt-4">
                               <KrishnaQuoteCard
                                 verse={message.verse}
-                                showSource={false}
+                                showSource={true}
                                 className="bg-white/50 border-none shadow-sm"
                               />
+                            </div>
+                          )}
+                          {message.sourceRecommendation && (
+                            <div className="mt-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+                              <h5 className="text-sm font-semibold text-green-700 mb-1 flex items-center">
+                                📚 स्रोत सुझाव:
+                              </h5>
+                              <p className="text-green-700 text-xs leading-relaxed">
+                                {message.sourceRecommendation}
+                              </p>
                             </div>
                           )}
                           <p className="text-xs mt-2 opacity-70">
