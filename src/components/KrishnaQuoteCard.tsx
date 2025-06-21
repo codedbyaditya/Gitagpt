@@ -38,12 +38,27 @@ export const KrishnaQuoteCard = ({
                 : `Chapter ${verse.chapter}, Verse ${verse.verse}`}
             </Badge>
             {showSource && (
-              <Badge
-                variant="outline"
-                className="text-xs text-gray-600 border-gray-300"
-              >
-                {verse.source}
-              </Badge>
+              <div className="flex items-center space-x-2">
+                <img
+                  src={verse.source_image}
+                  alt={verse.source}
+                  className="w-8 h-8 rounded object-cover border border-orange-200"
+                />
+                <div className="flex flex-col">
+                  <Badge
+                    variant="outline"
+                    className={`text-xs ${
+                      verse.source_quality === "best"
+                        ? "border-green-500 text-green-700 bg-green-50"
+                        : verse.source_quality === "excellent"
+                          ? "border-blue-500 text-blue-700 bg-blue-50"
+                          : "border-gray-300 text-gray-600"
+                    }`}
+                  >
+                    {verse.source} {verse.source_quality === "best" && "⭐"}
+                  </Badge>
+                </div>
+              </div>
             )}
           </div>
 
@@ -65,7 +80,7 @@ export const KrishnaQuoteCard = ({
           </div>
 
           {/* Meaning */}
-          <div className="bg-white/70 rounded-lg p-4 border border-orange-100">
+          <div className="bg-white/70 rounded-lg p-4 border border-orange-100 mb-3">
             <h4 className="text-sm font-semibold text-saffron-700 mb-2 flex items-center">
               🕊️ {isHindi ? "श्रीकृष्ण की सीख:" : "Krishna's Teaching:"}
             </h4>
@@ -73,6 +88,18 @@ export const KrishnaQuoteCard = ({
               {isHindi ? verse.meaning_hindi : verse.meaning_english}
             </p>
           </div>
+
+          {/* Practical Application */}
+          {verse.practical_application && (
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
+              <h4 className="text-sm font-semibold text-blue-700 mb-2 flex items-center">
+                💡 {isHindi ? "व्यावहारिक प्रयोग:" : "Practical Application:"}
+              </h4>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {verse.practical_application}
+              </p>
+            </div>
+          )}
 
           {/* Tags */}
           {verse.tags.length > 0 && (
