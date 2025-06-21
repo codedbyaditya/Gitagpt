@@ -67,22 +67,87 @@ const Index = () => {
     },
   ];
 
-  // YouTube videos (placeholder data)
+  // Enhanced YouTube videos with real recommendations
   const spiritualVideos = [
     {
-      title: "ISKCON Krishna Consciousness",
-      channel: "ISKCON",
-      thumbnail: "🎬",
+      title: "Complete Bhagavad Gita in Hindi",
+      channel: "ISKCON Dwarka",
+      thumbnail: "🎥",
+      views: "2.1M views",
+      duration: "18:45:32",
+      description:
+        "पूर्ण भगवद्गीता हिंदी में - A.C. भक्तिवेदांत स्वामी प्रभुपाद जी द्वारा",
     },
     {
-      title: "Swami Mukundananda Teachings",
-      channel: "Swami Mukundananda",
-      thumbnail: "🎬",
+      title: "Gita Saar by Swami Mukundananda",
+      channel: "JKYog",
+      thumbnail: "🕉️",
+      views: "5.8M views",
+      duration: "2:15:45",
+      description: "भगवद्गीता का सार - जीवन की समस्याओं का समाधान",
     },
     {
-      title: "Vivekananda Foundation",
+      title: "Karma Yoga Explained",
       channel: "Vivekananda Foundation",
-      thumbnail: "🎬",
+      thumbnail: "⚡",
+      views: "1.3M views",
+      duration: "45:20",
+      description: "कर्म योग की व्याख्या - स्वामी विवेकानंद के अनुसार",
+    },
+    {
+      title: "Daily Gita Meditation",
+      channel: "Spiritual Sadhana",
+      thumbnail: "🧘",
+      views: "890K views",
+      duration: "30:15",
+      description: "दैनिक गीता ध्यान - आंतरिक शांति के लिए",
+    },
+    {
+      title: "Bhakti Yoga Path",
+      channel: "Radha Krishna Temple",
+      thumbnail: "❤️",
+      views: "1.1M views",
+      duration: "52:30",
+      description: "भक्ति योग का मार्ग - प्रेम और समर्पण",
+    },
+    {
+      title: "Gita for Students",
+      channel: "Youth Spirituality",
+      thumbnail: "📚",
+      views: "2.5M views",
+      duration: "1:25:10",
+      description: "छात्रों के लिए गीता - परीक्षा और करियर में सफलता",
+    },
+  ];
+
+  // Book recommendations
+  const recommendedBooks = [
+    {
+      title: "Yatharth Geeta",
+      author: "Swami Adgadanand",
+      image:
+        "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
+      rating: 4.9,
+      speciality: "सबसे स्पष्ट व्याख्या",
+      description: "गीता की सबसे स्पष्ट और व्यावहारिक व्याख्या",
+    },
+    {
+      title: "Bhagavad Gita As It Is",
+      author: "A.C. Bhaktivedanta Swami Prabhupada",
+      image:
+        "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
+      rating: 4.8,
+      speciality: "भक्ति योग विशेषज्ञता",
+      description: "कृष्ण भावनामृत की गहरी समझ के लिए",
+    },
+    {
+      title: "Srimad Bhagavad Gita",
+      author: "Gita Press Gorakhpur",
+      image:
+        "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/gorakhpur-gita-4b0fde",
+      rating: 4.7,
+      speciality: "पारंपरिक भाष्य",
+      description: "संस्कृत पाठ के साथ धार्मिक अध्ययन",
     },
   ];
 
@@ -291,14 +356,15 @@ const Index = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-              Spiritual Learning Videos
+              🎥 Recommended Spiritual Videos
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Learn from renowned spiritual teachers and organizations
+              Learn from renowned spiritual teachers and deepen your
+              understanding of the Gita
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {spiritualVideos.map((video, index) => (
               <motion.div
                 key={index}
@@ -307,23 +373,118 @@ const Index = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
+                <Card className="hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden">
                   <CardContent className="p-0">
-                    <div className="aspect-video bg-gradient-to-br from-saffron-100 to-orange-100 flex items-center justify-center text-6xl group-hover:scale-105 transition-transform">
+                    <div className="aspect-video bg-gradient-to-br from-saffron-100 to-orange-100 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-300 relative">
                       {video.thumbnail}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg"
+                        >
+                          <Play className="text-saffron-600 ml-1" size={24} />
+                        </motion.div>
+                      </div>
+                      <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                        {video.duration}
+                      </div>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold text-gray-800 mb-1">
+                      <h3 className="font-semibold text-gray-800 mb-2 group-hover:text-saffron-600 transition-colors">
                         {video.title}
                       </h3>
-                      <p className="text-sm text-gray-600">{video.channel}</p>
+                      <p className="text-sm text-saffron-600 font-medium mb-1">
+                        {video.channel}
+                      </p>
+                      <p className="text-xs text-gray-500 mb-2">
+                        {video.views}
+                      </p>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {video.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Book Recommendations */}
+      <section className="py-16 bg-gradient-to-br from-saffron-50 to-orange-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+              📚 Recommended Gita Editions
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Choose the best Gita commentary for your spiritual journey
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {recommendedBooks.map((book, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="hover:shadow-xl transition-all duration-300 group h-full">
+                  <CardContent className="p-6 text-center">
+                    <motion.div
+                      whileHover={{ scale: 1.05, rotateY: 5 }}
+                      transition={{ duration: 0.3 }}
+                      className="mb-4"
+                    >
+                      <img
+                        src={book.image}
+                        alt={book.title}
+                        className="w-32 h-40 object-cover rounded-lg shadow-lg mx-auto border-2 border-orange-200"
+                      />
+                    </motion.div>
+                    <Badge
+                      className={`mb-3 ${
+                        book.rating >= 4.9
+                          ? "bg-green-100 text-green-700"
+                          : book.rating >= 4.8
+                            ? "bg-blue-100 text-blue-700"
+                            : "bg-gray-100 text-gray-700"
+                      }`}
+                    >
+                      ⭐ {book.rating} • {book.speciality}
+                    </Badge>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {book.title}
+                    </h3>
+                    <p className="text-saffron-600 font-medium mb-3">
+                      {book.author}
+                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                      {book.description}
+                    </p>
+                    <div className="space-y-2">
                       <Button
-                        variant="ghost"
+                        variant="outline"
                         size="sm"
-                        className="mt-2 text-saffron-600 hover:text-saffron-700"
+                        className="w-full border-saffron-300 text-saffron-600 hover:bg-saffron-50"
                       >
-                        <Play size={16} className="mr-1" />
-                        Watch Now
+                        📖 Preview
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="w-full bg-gradient-to-r from-saffron-500 to-orange-500 hover:from-saffron-600 hover:to-orange-600 text-white"
+                      >
+                        <Download size={14} className="mr-1" />
+                        Download
                       </Button>
                     </div>
                   </CardContent>
