@@ -14,46 +14,44 @@ const DownloadPage = () => {
     {
       title: "Yatharth Geeta",
       author: "Swami Adgadanand",
+      image: "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
       description:
-        "A profound commentary that reveals the true meaning of each verse with crystal clear explanations.",
+        "सबसे स्पष्ट और व्यावहारिक व्याख्या। गहरे अध्ययन के लिए सर्वोत्तम। जीवन की समस्याओं का व्यावहारिक समाधान।",
       pages: "850",
       language: "Hindi & English",
       rating: 4.9,
       size: "12.5 MB",
       featured: true,
+      quality: "best",
+      specialty: "सबसे स्पष्ट व्याख्या",
     },
     {
       title: "ISKCON Bhagavad Gita As It Is",
       author: "A.C. Bhaktivedanta Swami Prabhupada",
+      image: "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
       description:
-        "The most widely read Gita commentary, presenting Krishna consciousness philosophy.",
+        "विश्व में सबसे ज्यादा पढ़ी जाने वाली गीता। कृष्ण भावनामृत और भक्ति योग की गहरी समझ के लिए उत्कृष्ट।",
       pages: "972",
       language: "English & Hindi",
       rating: 4.8,
       size: "15.2 MB",
       featured: true,
+      quality: "excellent",
+      specialty: "भक्ति योग विशेषज्ञता",
     },
     {
       title: "Gorakhpur Press Gita",
       author: "Gita Press Gorakhpur",
+      image: "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/gorakhpur-gita-4b0fde",
       description:
-        "Traditional commentary with authentic Sanskrit verses and Hindi translations.",
+        "पारंपरिक भाष्य के साथ संस्कृत पाठ। धार्मिक अध्ययन और संस्कृत श्लोकों की शुद्ध उच्चारण के लिए उपयुक्त।",
       pages: "720",
       language: "Hindi & Sanskrit",
       rating: 4.7,
       size: "10.8 MB",
       featured: false,
-    },
-    {
-      title: "Ramakrishna Mission Gita",
-      author: "Swami Gambhirananda",
-      description:
-        "Scholarly commentary with deep philosophical insights and practical applications.",
-      pages: "680",
-      language: "English",
-      rating: 4.6,
-      size: "9.5 MB",
-      featured: false,
+      quality: "good",
+      specialty: "पारंपरिक भाष्य",
     },
   ];
 
@@ -121,30 +119,57 @@ const DownloadPage = () => {
                   transition={{ duration: 0.5, delay: 0.1 * index }}
                 >
                   <Card
-                    className={`hover:shadow-xl transition-all duration-300 h-full ${
+                    className={`hover:shadow-xl transition-all duration-300 h-full group ${
                       version.featured
                         ? "border-saffron-300 bg-gradient-to-br from-saffron-50 to-orange-50"
                         : "border-orange-200"
                     }`}
                   >
                     <CardHeader>
-                      <div className="flex items-start justify-between mb-2">
+                      <div className="flex items-start space-x-4 mb-4">
+                        <motion.div
+                          whileHover={{ scale: 1.05, rotateY: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <img
+                            src={version.image}
+                            alt={version.title}
+                            className="w-20 h-24 object-cover rounded-lg shadow-lg border-2 border-orange-200 group-hover:border-saffron-300 transition-colors"
+                          />
+                        </motion.div>
                         <div className="flex-1">
-                          <CardTitle className="text-xl text-gray-800 mb-1">
-                            {version.title}
-                          </CardTitle>
-                          <p className="text-sm text-gray-600 font-medium">
-                            {version.author}
-                          </p>
-                        </div>
-                        {version.featured && (
-                          <Badge className="bg-gradient-to-r from-saffron-500 to-orange-500 text-white">
-                            <Star size={12} className="mr-1" />
-                            Featured
+                          <div className="flex items-start justify-between mb-2">
+                            <div>
+                              <CardTitle className="text-xl text-gray-800 mb-1">
+                                {version.title}
+                              </CardTitle>
+                              <p className="text-sm text-gray-600 font-medium">
+                                {version.author}
+                              </p>
+                            </div>
+                            {version.featured && (
+                              <Badge className="bg-gradient-to-r from-saffron-500 to-orange-500 text-white">
+                                <Star size={12} className="mr-1" />
+                                Featured
+                              </Badge>
+                            )}
+                          </div>
+                          <Badge
+                            className={`mb-2 ${
+                              version.quality === "best"
+                                ? "bg-green-100 text-green-700"
+                                : version.quality === "excellent"
+                                ? "bg-blue-100 text-blue-700"
+                                : "bg-gray-100 text-gray-700"
+                            }`}
+                          >
+                            {version.quality === "best" && "⭐ सर्वोत्तम"}
+                            {version.quality === "excellent" && "🏆 उत्कृष्ट"}
+                            {version.quality === "good" && "✅ अच्छा"}
                           </Badge>
-                        )}
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                      <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
                         <span className="flex items-center">
                           <Star
                             className="text-yellow-400 fill-current mr-1"
@@ -155,27 +180,29 @@ const DownloadPage = () => {
                         <span>{version.pages} pages</span>
                         <span>{version.size}</span>
                       </div>
+                      <Badge variant="outline" className="text-xs mb-3">
+                        {version.specialty}
+                      </Badge>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-700 mb-4 leading-relaxed">
+                      <p className="text-gray-700 mb-4 leading-relaxed text-sm">
                         {version.description}
                       </p>
-                      <div className="flex items-center justify-between">
-                        <Badge variant="outline" className="text-xs">
-                          {version.language}
-                        </Badge>
-                        <div className="space-x-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="text-saffron-600 border-saffron-300 hover:bg-saffron-50"
-                          >
-                            <ExternalLink size={14} className="mr-1" />
-                            Preview
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="bg-gradient-to-r from-saffron-500 to-orange-500 hover:from-saffron-600 hover:to-orange-600 text-white"
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                "Yatharth Geeta",
+                "ISKCON Gita",
+                "Gorakhpur Press",
+              ].map((source) => (
+                <Button
+                  key={source}
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-saffron-600"
+                >
+                  <Download size={16} className="mr-2" />
+                  {source}
+                </Button>
+              ))}
                           >
                             <Download size={14} className="mr-1" />
                             Download
