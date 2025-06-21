@@ -14,7 +14,8 @@ const DownloadPage = () => {
     {
       title: "Yatharth Geeta",
       author: "Swami Adgadanand",
-      image: "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
+      image:
+        "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
       description:
         "सबसे स्पष्ट और व्यावहारिक व्याख्या। गहरे अध्ययन के लिए सर्वोत्तम। जीवन की समस्याओं का व्यावहारिक समाधान।",
       pages: "850",
@@ -28,7 +29,8 @@ const DownloadPage = () => {
     {
       title: "ISKCON Bhagavad Gita As It Is",
       author: "A.C. Bhaktivedanta Swami Prabhupada",
-      image: "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
+      image:
+        "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
       description:
         "विश्व में सबसे ज्यादा पढ़ी जाने वाली गीता। कृष्ण भावनामृत और भक्ति योग की गहरी समझ के लिए उत्कृष्ट।",
       pages: "972",
@@ -42,7 +44,8 @@ const DownloadPage = () => {
     {
       title: "Gorakhpur Press Gita",
       author: "Gita Press Gorakhpur",
-      image: "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/gorakhpur-gita-4b0fde",
+      image:
+        "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/gorakhpur-gita-4b0fde",
       description:
         "पारंपरिक भाष्य के साथ संस्कृत पाठ। धार्मिक अध्ययन और संस्कृत श्लोकों की शुद्ध उच्चारण के लिए उपयुक्त।",
       pages: "720",
@@ -95,7 +98,7 @@ const DownloadPage = () => {
               </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Access complete Bhagavad Gita texts from four authentic sources.
+              Access complete Bhagavad Gita texts from three authentic sources.
               Study offline and deepen your spiritual journey.
             </p>
           </motion.div>
@@ -110,7 +113,7 @@ const DownloadPage = () => {
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
               Complete Bhagavad Gita Editions
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
               {gitaVersions.map((version, index) => (
                 <motion.div
                   key={index}
@@ -159,8 +162,8 @@ const DownloadPage = () => {
                               version.quality === "best"
                                 ? "bg-green-100 text-green-700"
                                 : version.quality === "excellent"
-                                ? "bg-blue-100 text-blue-700"
-                                : "bg-gray-100 text-gray-700"
+                                  ? "bg-blue-100 text-blue-700"
+                                  : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {version.quality === "best" && "⭐ सर्वोत्तम"}
@@ -188,33 +191,74 @@ const DownloadPage = () => {
                       <p className="text-gray-700 mb-4 leading-relaxed text-sm">
                         {version.description}
                       </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                "Yatharth Geeta",
-                "ISKCON Gita",
-                "Gorakhpur Press",
-              ].map((source) => (
-                <Button
-                  key={source}
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-saffron-600"
-                >
-                  <Download size={16} className="mr-2" />
-                  {source}
-                </Button>
+                      <div className="flex items-center justify-between">
+                        <Badge variant="outline" className="text-xs">
+                          {version.language}
+                        </Badge>
+                        <div className="space-x-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="text-saffron-600 border-saffron-300 hover:bg-saffron-50"
+                          >
+                            <ExternalLink size={14} className="mr-1" />
+                            Preview
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="bg-gradient-to-r from-saffron-500 to-orange-500 hover:from-saffron-600 hover:to-orange-600 text-white"
+                          >
+                            <Download size={14} className="mr-1" />
+                            Download
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Additional Resources */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Download All Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            className="mb-16"
+          >
+            <Card className="bg-gradient-to-r from-saffron-600 to-orange-600 text-white">
+              <CardContent className="py-12 text-center">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                  Download All Gita Editions
+                </h2>
+                <p className="text-saffron-100 max-w-2xl mx-auto mb-8">
+                  Access all three authentic versions of the Bhagavad Gita in
+                  PDF format for offline reading and study
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {["Yatharth Geeta", "ISKCON Gita", "Gorakhpur Press"].map(
+                    (source) => (
+                      <Button
+                        key={source}
+                        variant="outline"
+                        className="border-white text-white hover:bg-white hover:text-saffron-600"
+                      >
+                        <Download size={16} className="mr-2" />
+                        {source}
+                      </Button>
+                    ),
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Additional Resources */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
@@ -261,16 +305,12 @@ const DownloadPage = () => {
               ))}
             </div>
           </motion.div>
-        </div>
-      </section>
 
-      {/* Usage Guidelines */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Usage Guidelines */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
           >
             <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
               <CardHeader>
