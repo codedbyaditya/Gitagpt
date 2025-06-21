@@ -203,16 +203,6 @@ const DownloadPage = () => {
                   {source}
                 </Button>
               ))}
-                          >
-                            <Download size={14} className="mr-1" />
-                            Download
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
             </div>
           </motion.div>
 
