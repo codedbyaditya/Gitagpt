@@ -8,8 +8,12 @@ export interface GitaVerse {
   meaning_hindi: string;
   meaning_english: string;
   source: string;
+  source_image: string;
+  source_quality: "best" | "good" | "excellent";
   tags: string[];
   category: string;
+  practical_application: string;
+  life_situation: string[];
 }
 
 export const gitaVerses: GitaVerse[] = [
@@ -28,15 +32,26 @@ export const gitaVerses: GitaVerse[] = [
     meaning_english:
       "Happiness and distress, victory and defeat, success and failure are all temporary. Practice patience and tolerance.",
     source: "Yatharth Geeta",
+    source_image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
+    source_quality: "best",
     tags: ["stress", "failure", "patience", "tolerance", "temporary"],
     category: "emotional_balance",
+    practical_application:
+      "जब आप तनाव में हों तो याद रखें कि यह स्थिति अस्थायी है। धैर्य रखें और समय के साथ सब ठीक हो जाएगा।",
+    life_situation: [
+      "job_stress",
+      "exam_failure",
+      "relationship_problems",
+      "financial_crisis",
+    ],
   },
   {
     id: "2.47",
     chapter: 2,
     verse: 47,
     sanskrit:
-      "कर्मण्येवाधिकारस्ते मा फलेष�� कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि।।",
+      "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि।।",
     hindi:
       "तेरा कर्म करने में ही अधिकार है, उसके फलों में कभी नहीं। इसलिए तू कर्मों के फल का हेतु मत बन और तेरी अकर्म में भी आसक्ति न हो।",
     english:
@@ -46,8 +61,19 @@ export const gitaVerses: GitaVerse[] = [
     meaning_english:
       "Focus on your actions, not the results. This is the most important principle of life.",
     source: "ISKCON Gita",
+    source_image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
+    source_quality: "excellent",
     tags: ["karma", "duty", "action", "results", "detachment"],
     category: "karma_yoga",
+    practical_application:
+      "काम में असफलता के डर से काम करना बंद न करें। बस अपना बेस्ट दें, रिजल्ट की चिंता न करें।",
+    life_situation: [
+      "work_pressure",
+      "competitive_exams",
+      "business_ventures",
+      "career_decisions",
+    ],
   },
   {
     id: "6.5",
@@ -64,26 +90,48 @@ export const gitaVerses: GitaVerse[] = [
     meaning_english:
       "Control your mind. You are your own greatest friend and your own worst enemy.",
     source: "Gorakhpur Press Gita",
+    source_image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/gorakhpur-gita-4b0fde",
+    source_quality: "good",
     tags: ["self_control", "mind", "friend", "enemy", "inner_strength"],
     category: "self_development",
+    practical_application:
+      "नकारात्मक विचारों को सकारात्मक में बदलें। अपने मन की boss आप हैं, मन की नहीं।",
+    life_situation: [
+      "depression",
+      "anxiety",
+      "negative_thoughts",
+      "self_doubt",
+    ],
   },
   {
-    id: "7.19",
-    chapter: 7,
-    verse: 19,
+    id: "3.27",
+    chapter: 3,
+    verse: 27,
     sanskrit:
-      "बहूनां जन्मनामन्ते ज्ञानवान्मां प्रपद्यते। वासुदेवः सर्वमिति स महात्मा सुदुर्लभः।।",
+      "प्रकृतेः क्रियमाणानि गुणैः कर्माणि सर्वशः। अहंकारविमूढात्मा कर्ताहमिति मन्यते।।",
     hindi:
-      "बहुत जन्मों के अन्त में ज्ञानवान् पुरुष मुझको प्राप्त होता है। वासुदेव सब कुछ है- ऐसा जानने वाला वह महात्मा अति दुर्लभ है।",
+      "वास्तव में सम्पूर्ण कर्म सब प्रकार से प्रकृति के ग��णों द्वारा किये जाते हैं, परन्तु अहंकार से मोहित हुआ मनुष्य 'मैं कर्ता हूँ' ऐसा मानता है।",
     english:
-      "After many births and deaths, he who is actually in knowledge surrenders unto Me, knowing Me to be the cause of all causes and all that is. Such a great soul is very rare.",
+      "The spirit soul bewildered by the influence of false ego thinks himself the doer of activities that are in actuality carried out by the three modes of material nature.",
     meaning_hindi:
-      "ईश्वर सब कुछ में व्याप्त है। इस सत्य को समझना और अनुभव करना दुर्लभ है।",
+      "अहंकार छोड़ें। सब कुछ प्रकृति के नियमों से हो रहा है, आप केवल निमित्त हैं।",
     meaning_english:
-      "God pervades everything. Understanding and experiencing this truth is rare.",
-    source: "Ramakrishna Mission Gita",
-    tags: ["knowledge", "surrender", "divine", "rare", "wisdom"],
-    category: "spiritual_realization",
+      "Give up ego. Everything happens according to nature's laws, you are just an instrument.",
+    source: "Yatharth Geeta",
+    source_image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
+    source_quality: "best",
+    tags: ["ego", "humility", "nature", "doership", "surrender"],
+    category: "ego_management",
+    practical_application:
+      "सफलता मिले तो अहंकार न करें, असफलता मिले तो हार न मानें। दोनों स्थितियों में विनम्र रहें।",
+    life_situation: [
+      "success_pride",
+      "failure_despair",
+      "leadership_roles",
+      "team_conflicts",
+    ],
   },
   {
     id: "18.66",
@@ -100,8 +148,19 @@ export const gitaVerses: GitaVerse[] = [
     meaning_english:
       "Surrender to God. He will liberate you from all sufferings. There is nothing to fear.",
     source: "ISKCON Gita",
+    source_image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
+    source_quality: "excellent",
     tags: ["surrender", "liberation", "fear", "divine_protection", "moksha"],
     category: "surrender",
+    practical_application:
+      "जब सब कुछ असंभव लगे तो भगवान पर भरोसा रखें। वे आपका सबसे बड़ा सहारा हैं।",
+    life_situation: [
+      "hopelessness",
+      "fear_of_death",
+      "guilt",
+      "spiritual_crisis",
+    ],
   },
 ];
 
