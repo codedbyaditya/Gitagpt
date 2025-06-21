@@ -22,7 +22,7 @@ export const gitaVerses: GitaVerse[] = [
     chapter: 2,
     verse: 14,
     sanskrit:
-      "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः। आगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत।।",
+      "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः। आगमापायिनोऽनित्यास्तांस्तितिक्���स्व भारत।।",
     hindi:
       "हे कुन्तीपुत्र! सर्दी-गर्मी और सुख-दुःख को देने वाले इन्द्रियों और इनके विषयों के संयोग तो आने-जाने वाले और अनित्य हैं, इसलिए हे भारत! इनको सहन कर।",
     english:
@@ -53,7 +53,7 @@ export const gitaVerses: GitaVerse[] = [
     sanskrit:
       "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि।।",
     hindi:
-      "तेरा कर्म करने में ही अधिकार है, उसके फलों में कभी नहीं। इसलिए तू कर्मों के फल का हेतु मत बन और तेरी अकर्म में भी आसक्ति न हो।",
+      "तेरा कर्म करने में ही अधिकार है, उसके फलों में कभी नहीं। ���सलिए तू कर्मों के फल का हेतु मत बन और तेरी अकर्म में भी आसक्ति न हो।",
     english:
       "You have a right to perform your prescribed duty, but not to the fruits of action. Never consider yourself the cause of the results of your activities, and never be attached to not doing your duty.",
     meaning_hindi:
@@ -111,7 +111,7 @@ export const gitaVerses: GitaVerse[] = [
     sanskrit:
       "प्रकृतेः क्रियमाणानि गुणैः कर्माणि सर्वशः। अहंकारविमूढात्मा कर्ताहमिति मन्यते।।",
     hindi:
-      "वास्तव में सम्पूर्ण कर्म सब प्रकार से प्रकृति के ग��णों द्वारा किये जाते हैं, परन्तु अहंकार से मोहित हुआ मनुष्य 'मैं कर्ता हूँ' ऐसा मानता है।",
+      "वास्तव में सम्पूर्ण कर्म सब प्रकार से प्रकृति के गुणों द्वारा किये जाते हैं, परन्तु अहंकार से मोहित हुआ मनुष्य 'मैं कर्ता हूँ' ऐसा मानता है।",
     english:
       "The spirit soul bewildered by the influence of false ego thinks himself the doer of activities that are in actuality carried out by the three modes of material nature.",
     meaning_hindi:
@@ -182,3 +182,64 @@ export const getVersesByTag = (tag: string): GitaVerse[] => {
 export const getVersesByCategory = (category: string): GitaVerse[] => {
   return gitaVerses.filter((verse) => verse.category === category);
 };
+
+export const getBestVerseForSituation = (situation: string): GitaVerse => {
+  // Find verse that matches life situation and has best quality source
+  const matchingVerses = gitaVerses.filter(
+    (verse) =>
+      verse.life_situation.some((s) => s.includes(situation.toLowerCase())) ||
+      verse.tags.some((tag) => situation.toLowerCase().includes(tag)),
+  );
+
+  if (matchingVerses.length === 0) return getRandomVerse();
+
+  // Prefer verses from best quality sources
+  const bestVerse =
+    matchingVerses.find((v) => v.source_quality === "best") ||
+    matchingVerses.find((v) => v.source_quality === "excellent") ||
+    matchingVerses[0];
+
+  return bestVerse;
+};
+
+export const getSourceRecommendation = (verse: GitaVerse): string => {
+  const recommendations = {
+    "Yatharth Geeta":
+      "स्वामी अद्गदानंद जी का यह भाष्य सबसे स्पष्ट और व्यावहारिक है। गहरे अध्ययन के लिए सर्वोत्तम।",
+    "ISKCON Gita":
+      "प्रभुपाद जी का भाष्य भक्ति योग के लिए उत्कृष्ट है। कृष्ण भावनामृत समझने के लिए बेहतरीन।",
+    "Gorakhpur Press Gita":
+      "पारंपरिक भाष्य के साथ संस्कृत पाठ। धार्मिक अध्ययन के लिए उपयुक्त।",
+  };
+  return recommendations[verse.source] || "";
+};
+
+export const gitaSources = [
+  {
+    name: "Yatharth Geeta",
+    author: "Swami Adgadanand",
+    image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/yatharth-de8a37",
+    quality: "best",
+    specialty: "सबसे स्पष्ट व्याख्या",
+    description: "स्वामी अद्गदानंद जी की अद्वितीय व्याख्या के साथ",
+  },
+  {
+    name: "ISKCON Gita",
+    author: "A.C. Bhaktivedanta Swami Prabhupada",
+    image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/isckon-229285",
+    quality: "excellent",
+    specialty: "भक्ति योग विशेषज्ञता",
+    description: "कृष्ण भावनामृत की गहरी समझ के लिए",
+  },
+  {
+    name: "Gorakhpur Press Gita",
+    author: "Gita Press Gorakhpur",
+    image:
+      "https://cdn.builder.io/api/v1/assets/91dee6dff05e4edeb389ea8ac7a33180/gorakhpur-gita-4b0fde",
+    quality: "good",
+    specialty: "पारंपरिक भाष्य",
+    description: "संस्कृत पाठ के साथ धार्मिक अध्ययन",
+  },
+];
